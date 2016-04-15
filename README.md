@@ -11,15 +11,16 @@ The script was tested using Bash on both OS X and Debian Linux.
 <br>
 
 ####Configuration
-Using the 'on' and 'off' field of your accessory in the config.json file, you can predefine a maximum of two shell command sequences. Note that you will need to use two successive single-quotes (`''`) to have these automatically converted to double-quotes in the final shell command, since the json parser can't handle nested double quotation marks. A sample configuration is as follows:
+Using the 'on' and 'off' field of your accessory in the config.json file, you can predefine a maximum of two shell commands or scripts (both options are shown in the example below). Note that you will need to use two successive single-quotes (`''`) to have these automatically converted to double-quotes in the final shell command, since the json parser can't handle nested double quotation marks. A sample configuration is as follows:
 
 ```
 "accessories": [
 	{
 		"accessory": "Bash",
 		"name": "Cinema",
-		"on": "telnet towel.blinkenlights.nl",
+		"on": "./telnetExample.sh",
 		"off": "sudo shutdown -r +60"
 	}
 ]
 ```
+By telling Siri to turn the Cinema on, it automatically starts a full length movie loaded over telnet. By telling it to turn the Cinema off, it sets a timer to shutdown in an hour. 

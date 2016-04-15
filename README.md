@@ -1,9 +1,25 @@
 #Bash plugin for Homebridge server
 
-By installing this plugin as a node module for your Homebridge server (https://github.com/nfarina/homebridge), you can command the execution any bash script or separate sequence of bash commands by a simple siri command.
+By installing this node module as a plugin for your Homebridge server (https://github.com/nfarina/homebridge), you can command the execution of any shell command or multiline shell script from your phone, using either Siri or any Homekit app.
+The script was tested using Bash on both OS X and Debian Linux.
 <br>
+
 ####Installation
-After installing homebridge, create a node_modules directory somewhere in the path in between the root and where your homebridge directory is. This is due to nodejs recursively searching the file tree starting from the running directory down to root for a directory containing a node_module directory to use as dependencies. If you place the bash plugin within this folder, upon starting homebridge the plugin should be recognized as a new device
+1. Install homebridge using: `npm install -g homebridge`
+2. Create a node_modules directory somewhere in the path in between the root and where your homebridge directory is. This is due to nodejs recursively searching the file tree starting from the running directory down to root for a directory containing a node_module directory to use as dependencies. If you place the bash plugin within this folder, upon starting homebridge the plugin should be recognized as a new device
+3. Update your configuration file as described in the main homebridge github page. See `sample-config.json` in this repository for a sample.
 <br>
+
 ####Configuration
-Use the config file to place the path (relative or absolute) to the bash script you want to execute, or specify a value in the "command" field to directly execute that sequence of commands. Since the json parser uses the " " quotation marks to determine the end of the string,
+Using the 'on' and 'off' field of your accessory in the config.json file, you can predefine a maximum of two shell command sequences. Note that you will need to use two successive single-quotes (`''`) to have these automatically converted to double-quotes in the final shell command, since the json parser can't handle nested double quotation marks. A sample configuration is as follows:
+
+```
+"accessories": [
+	{
+		"accessory": "Bash",
+		"name": "Cinema",
+		"on": "telnet towel.blinkenlights.nl",
+		"off": "sudo shutdown -r +60"
+	}
+]
+```
